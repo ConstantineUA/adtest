@@ -1,0 +1,22 @@
+<header>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="navbar-logo" class="navbar-brand" href="{{ url('homepage') }}">ADServer</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="disabled"><a href="{{ path('fos_user_profile_show') }}">{{ 'profile' | trans|capitalize }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'logout' | trans|capitalize }}</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+</header>

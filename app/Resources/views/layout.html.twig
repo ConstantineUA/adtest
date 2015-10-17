@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+{% endblock %}
+
+{% block body %}
+{% include 'blocks/header.menu.html.twig' %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-push-2">
+            <h2 class="page-header">{% block pageHeader %}{% endblock %}</h2>
+
+            {% include 'blocks/flash-messages.html.twig' %}
+
+            {% block content %}{% endblock %}
+        </div>
+
+
+        <div class="col-xs-12 col-sm-2 col-sm-pull-10 sidebar">
+            <footer class="footer text-muted">
+                © 2015 [ADServer]. All&nbsp;rights&nbsp;reserved.
+            </footer>
+        </div>
+    </div>
+</main>
+{% endblock %}

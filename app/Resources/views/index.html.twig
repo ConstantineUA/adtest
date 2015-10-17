@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ADServer{% endblock %}
+
+
+{% block body %}
+<div class="jumbotron">
+    <h1>Welcome to ADServer!</h1>
+    <p>The most popular ad server on the Earth</p>
+    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-info btn-lg">{{ 'register'|trans|capitalize }}</a>
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-default btn-lg">{{ 'login'|trans|capitalize }}</a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">This is marketing page describing the system</div>
+        <div class="col-sm-4">Probably something about terms and permissions here</div>
+        <div class="col-sm-4">Another column with the handy info to convince a potential user</div>
+    </div>
+</div>
+
+{% endblock %}
