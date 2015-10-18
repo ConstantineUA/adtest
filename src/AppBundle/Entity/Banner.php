@@ -3,9 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use AppBundle\Entity\Contentunit;
 
 /**
@@ -28,16 +29,20 @@ class Banner
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\Length(max=128)
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\Length(max=128)
      */
     protected $caption;
 
     /**
      * @ORM\Column(type="string", length=1024)
+     * @Assert\Length(max=1024)
+     * @Assert\Url(checkDNS = true)
      */
     protected $clickurl;
 
@@ -62,7 +67,8 @@ class Banner
     protected $user;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255)
      *
      * @var string
      */
@@ -84,6 +90,7 @@ class Banner
 
     /**
      * @Vich\UploadableField(mapping="banner_image", fileNameProperty="imageName")
+     * @Assert\Image()
      *
      * @var File
      */
@@ -191,30 +198,6 @@ class Banner
     public function getClickurl()
     {
         return $this->clickurl;
-    }
-
-    /**
-     * Set contentunit
-     *
-     * @param Contentunit $contentunit
-     *
-     * @return Banner
-     */
-    public function setContentunit(Contentunit $contentunit = null)
-    {
-        $this->contentunit = $contentunit;
-
-        return $this;
-    }
-
-    /**
-     * Get contentunit
-     *
-     * @return Contentunit
-     */
-    public function getContentunit()
-    {
-        return $this->contentunit;
     }
 
     /**

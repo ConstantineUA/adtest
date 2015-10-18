@@ -18,7 +18,7 @@ class BannerType extends AbstractType
         $builder
             ->add('name')
             ->add('caption')
-            ->add('clickurl', 'url')
+            ->add('clickurl')
             ->add('imageFile', 'banner_image', array('required' => false))
 
             ->add('save', 'submit')
