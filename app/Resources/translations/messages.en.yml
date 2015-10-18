@@ -2,3 +2,17 @@ login: login
 logout: logout
 profile: profile
 register: register
+
+tutorial: Tutorial
+banners: Banners
+campaigns: Campaigns
+
+indexBanners: All your Banners
+addBanner: Add a Banner
+bannerAdded: The banner has been added!
+bannerDeleteError: An error occured while deleteing a banner
+bannerEditError: An error occured while editing a banner
+bannerEditSuccess: A banner has been updated successfully
+bannerDeleteSuccess: A banner has been deleted successfully
+
+noBanners: 'No banners yet!'

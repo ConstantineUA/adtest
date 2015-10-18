@@ -1,0 +1,6 @@
+<div class="adserver-banner" style="text-align: center; padding: 2px; border: 1px solid gray; border-radius: 4px;">
+    <a href="{{ banner.clickurl }}" target="_blank" style="text-decoration: none; color: black;">
+        <img class="adserver-image {{ imgClass }}" src="{{ vich_uploader_asset(banner, 'imageFile', 'AppBundle\\Entity\\Banner') }}" alt="{{ banner.name }}">
+        <span class="adserver-caption">{{ banner.caption }}</span>
+    </a>
+</div>

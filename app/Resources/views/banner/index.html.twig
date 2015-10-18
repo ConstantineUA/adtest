@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Banners{% endblock %}
+
+{% block pageHeader %}{{ 'indexBanners'|trans }}{% endblock %}
+
+
+{% block content %}
+
+{% for banner in banners %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-left">
+                {% include 'banner/banner.html.twig' with { imgClass: 'media-object' } %}
+            </div>
+
+            <div class="media-body">
+                <h4 class="media-heading">{{ banner.name }}</h4>
+                <p>Contentunit: {{ banner.code }}</p>
+                <a href="{{ path('bannerEdit', { id: banner.id }) }}" class="btn btn-primary js-edit-button">Edit</a>
+                <a href="{{ path('bannerDelete', { id: banner.id }) }}" class="btn btn-danger js-delete-button">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">{{ 'noBanners'|trans }}</div>
+{% endfor %}
+
+{% endblock %}
+
+{% block sidebar %}
+{% include 'banner/sidebar.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('js/banners-index.controller.js') }}"></script>
+{% endblock %}

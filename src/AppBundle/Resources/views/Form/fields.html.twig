@@ -1,0 +1,11 @@
+{% block banner_image_widget %}
+    {% spaceless %}
+
+        {% set subject =  form.parent.vars.value %}
+        {% if subject.id and subject.imageName %}
+        <img src="{{ vich_uploader_asset(subject, name) }}">
+        {% endif %}
+
+        {{ block('file_widget') }}
+    {% endspaceless %}
+{% endblock %}

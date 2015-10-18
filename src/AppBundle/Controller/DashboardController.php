@@ -4,14 +4,21 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * The controller to render static pages inside the dashboard
+ *
+ * @author constantine
+ *
+ */
 class DashboardController extends Controller
 {
     /**
-     * @Route("/dashboard", name="dashboard")
+     * Renders the dashboard
+     *
+     * @Route("/dashboard/", name="dashboard")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return $this->render('dashboard.html.twig', array());
     }

@@ -1,9 +1,12 @@
 {% import _self as self %}
 
-{% macro alerts(key, status) %}
-{% set messages = app.session.flashbag.get(key) %}
-{% for message in messages %}
-    <div class="alert alert-{{ status }} fade in">
+{{ self.alerts(flash_info) }}
+{{ self.alerts(flash_success) }}
+{{ self.alerts(flash_error) }}
+
+{% macro alerts(code) %}
+{% for message in app.session.flashbag.get(code) %}
+    <div class="alert alert-{{ code }} fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{ message }}
     </div>

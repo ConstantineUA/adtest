@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}New Banner{% endblock %}
+
+{% block pageHeader %}{{ 'addBanner'|trans }}{% endblock %}
+
+{% block content %}
+{{ form(form) }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'banner/sidebar.html.twig' %}
+{% endblock %}
