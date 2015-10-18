@@ -33,7 +33,7 @@ class BannerRepository extends EntityRepository
                 b.imageName,
                 c.code
             FROM AppBundle\Entity\Banner b
-            JOIN b.contentunits c
+            LEFT JOIN b.contentunits c
             WHERE b.user = :user
             ORDER BY b.updatedAt DESC'
         )->setParameter('user', $user);
