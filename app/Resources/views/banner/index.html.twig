@@ -7,28 +7,11 @@
 
 {% block content %}
 
-{% for banner in banners %}
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="media">
-            <div class="{% if banner.imageName %}media-left{% else %}pull-left{% endif %}">
-                {% include 'banner/banner.html.twig' with { imgClass: 'media-object' } %}
-            </div>
-
-            <div class="media-body">
-                <h4 class="media-heading">{{ banner.name }}</h4>
-                {% if banner.imageName %}
-                <p>Contentunit: {{ banner.code }}</p>
-                {% endif %}
-                <a href="{{ path('bannerEdit', { id: banner.id }) }}" class="btn btn-primary js-edit-button">Edit</a>
-                <a href="{{ path('bannerDelete', { id: banner.id }) }}" class="btn btn-danger js-delete-button">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
+{% if banners %}
+{% include 'banner/list.html.twig' with { showButtons: true } %}
 {% else %}
 <div class="alert alert-info">{{ 'noBanners'|trans }}</div>
-{% endfor %}
+{% endif %}
 
 {% endblock %}
 

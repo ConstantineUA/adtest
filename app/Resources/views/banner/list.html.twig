@@ -1,0 +1,23 @@
+{% for banner in banners %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="media">
+            <div class="{% if banner.imageName %}media-left{% else %}pull-left{% endif %}">
+                {% include 'banner/banner.html.twig' with { imgClass: 'media-object' } %}
+            </div>
+
+            <div class="media-body">
+                <h4 class="media-heading">{{ banner.name }}</h4>
+                {% if banner.contentunit_code %}
+                <p>Contentunit: {{ banner.contentunit_code }}</p>
+                {% endif %}
+
+                {% if showButtons %}
+                <a href="{{ path('bannerEdit', { id: banner.id }) }}" class="btn btn-primary js-edit-button">Edit</a>
+                <a href="{{ path('bannerDelete', { id: banner.id }) }}" class="btn btn-danger js-delete-button">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
