@@ -25,6 +25,11 @@ class User extends BaseUser
      */
     protected $banners;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Campaign", mappedBy="user", cascade={"remove"})
+     */
+    protected $campaigns;
+
     public function __construct()
     {
         parent::__construct();
@@ -62,5 +67,39 @@ class User extends BaseUser
     public function getBanners()
     {
         return $this->banners;
+    }
+
+    /**
+     * Add campaign
+     *
+     * @param \AppBundle\Entity\Campaign $campaign
+     *
+     * @return User
+     */
+    public function addCampaign(\AppBundle\Entity\Campaign $campaign)
+    {
+        $this->campaigns[] = $campaign;
+
+        return $this;
+    }
+
+    /**
+     * Remove campaign
+     *
+     * @param \AppBundle\Entity\Campaign $campaign
+     */
+    public function removeCampaign(\AppBundle\Entity\Campaign $campaign)
+    {
+        $this->campaigns->removeElement($campaign);
+    }
+
+    /**
+     * Get campaigns
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCampaigns()
+    {
+        return $this->campaigns;
     }
 }
