@@ -8,13 +8,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a id="navbar-logo" class="navbar-brand" href="{{ url('homepage') }}">ADServer</a>
+                <a id="navbar-logo" class="navbar-brand" href="{{ url('dashboard') }}">ADServer</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('bannerIndex') }}">{{ 'tutorial' | trans }}</a></li>
                     <li><a href="{{ path('bannerIndex') }}">{{ 'banners' | trans }}</a></li>
-                    <li><a href="{{ path('bannerIndex') }}">{{ 'campaigns' | trans }}</a></li>
+                    <li><a href="{{ path('campaignIndex') }}">{{ 'campaigns' | trans }}</a></li>
                     <li class="disabled"><a href="{{ path('fos_user_profile_show') }}">{{ 'profile' | trans|capitalize }}</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">{{ 'logout' | trans|capitalize }}</a></li>
                 </ul>
