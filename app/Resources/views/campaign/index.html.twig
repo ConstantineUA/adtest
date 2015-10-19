@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Campaigns{% endblock %}
+
+{% block pageHeader %}{{ 'indexCampaigns'|trans }}{% endblock %}
+
+
+{% block content %}
+
+{% if campaigns %}
+<div class="list-group">
+{% for campaign in campaigns %}
+    <a href="{{ path('campaignSingleView', { id: campaign.id }) }}" class="list-group-item">{{ campaign.name }} <small>{{ campaign.description }}</small></a>
+{% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">{{ 'noCampaigns'|trans }}</div>
+{% endif %}
+
+{% endblock %}
+
+{% block sidebar %}
+{% include 'campaign/sidebar.html.twig' %}
+{% endblock %}

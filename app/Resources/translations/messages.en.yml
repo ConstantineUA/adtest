@@ -14,5 +14,10 @@ bannerDeleteError: An error occured while deleteing a banner
 bannerEditError: An error occured while editing a banner
 bannerEditSuccess: A banner has been updated successfully
 bannerDeleteSuccess: A banner has been deleted successfully
+noBanners: No banners yet!
 
-noBanners: 'No banners yet!'
+indexCampaigns: All your Campaigns
+noCampaigns: No campaigns yet!
+addCampaign: Add a Campaign
+campaignAdded: The campaign has been added!
+

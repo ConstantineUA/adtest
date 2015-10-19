@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ campaign.name }} Campaign{% endblock %}
+
+{% block pageHeader %}{{ campaign.name }}{% endblock %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-body">{{ campaign.description }}</div>
+</div>
+{% if campaign.banners %}
+{% include 'banner/list.html.twig' with { banners: campaign.banners, showButtons: false } %}
+{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'campaign/sidebar.html.twig' %}
+{% endblock %}

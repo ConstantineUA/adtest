@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}New Campaign{% endblock %}
+
+{% block pageHeader %}{{ 'addCampaign'|trans }}{% endblock %}
+
+{% block content %}
+{{ form(form) }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'campaign/sidebar.html.twig' %}
+{% endblock %}
