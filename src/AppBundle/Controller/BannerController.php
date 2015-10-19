@@ -20,13 +20,11 @@ class BannerController extends Controller
     /**
      * Renders the list of available banners
      *
-     * @Route("/banner/", name="bannerIndex")
+     * @Route("/banners/", name="bannerIndex")
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $banners = $em->getRepository('AppBundle\Entity\Banner')
+        $banners = $this->getDoctrine()->getRepository('AppBundle\Entity\Banner')
             ->findByUserForRender($this->getUser());
 
         $pageData = array(
