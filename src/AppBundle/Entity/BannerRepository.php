@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use UserBundle\Entity\User;
-use AppBundle\AppBundle;
 
 /**
  * Custom repository to deals with banners
@@ -22,22 +21,52 @@ class BannerRepository extends EntityRepository
      */
     public function findByUserForRender(User $user)
     {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQuery(
-            'SELECT
-                b.id,
-                b.name,
-                b.caption,
-                b.clickurl,
-                b.imageName,
-                c.code
-            FROM AppBundle\Entity\Banner b
-            LEFT JOIN b.contentunits c
-            WHERE b.user = :user
-            ORDER BY b.updatedAt DESC'
-        )->setParameter('user', $user);
+        $query = $this->getBasicQueryBuilderForRender()
+            ->setParameter('user', $user)
+            ->getQuery();
 
         return $query->getArrayResult();
+    }
+
+    /**
+     * Returns the array of banners to render for the given user and category id
+     *
+     * @param User $user
+     * @param int $categoryId
+     * @return array
+     */
+    public function findByUserAndCategoryForRender(User $user, $categoryId)
+    {
+        $query = $this->getBasicQueryBuilderForRender()
+            ->join('b.campaigns', 'c')
+            ->andWhere('c.id = :id')
+            ->setParameters(array(
+                'user' => $user,
+                'id' => $categoryId,
+
+            ))
+            ->getQuery();
+
+        return $query->getArrayResult();
+    }
+
+    /**
+     * Creates the basic Doctrine query builder with all necessary fields to render a banner
+     *
+     * @return Doctrine\ORM\QueryBuilder
+     */
+    protected function getBasicQueryBuilderForRender()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select(array(
+                'b.id', 'b.name', 'b.caption', 'b.clickurl', 'b.imageName', 'cnt.code AS contentunit_code'
+            ))
+            ->from('AppBundle\Entity\Banner', 'b')
+            ->leftJoin('b.contentunits', 'cnt')
+            ->where('b.user = :user')
+            ->orderBy('b.updatedAt', 'DESC');
+
+        return $qb;
     }
 }
