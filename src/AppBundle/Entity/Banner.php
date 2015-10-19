@@ -51,10 +51,10 @@ class Banner
      * @ORM\JoinTable(
      *     name="ads_banners_contentunits",
      *     joinColumns={
-     *         @ORM\JoinColumn(name="banner_id", referencedColumnName="id", onDelete="CASCADE")
+     *         @ORM\JoinColumn(name="banner_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      *     },
      *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="contentunit_id", referencedColumnName="id", onDelete="CASCADE")
+     *         @ORM\JoinColumn(name="contentunit_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      *     }
      * )
      **/
@@ -95,6 +95,13 @@ class Banner
      * @var File
      */
     protected $imageFile;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Campaign", mappedBy="banners")
+     **/
+    protected $campaigns;
+
+
 
     public function __construct()
     {
@@ -320,5 +327,63 @@ class Banner
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Banner
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Add banner
+     *
+     * @param \AppBundle\Entity\Campaign $banner
+     *
+     * @return Banner
+     */
+    public function addBanner(Campaign $banner)
+    {
+        $this->banners[] = $banner;
+
+        return $this;
+    }
+
+    /**
+     * Remove banner
+     *
+     * @param \AppBundle\Entity\Campaign $banner
+     */
+    public function removeBanner(Campaign $banner)
+    {
+        $this->banners->removeElement($banner);
+    }
+
+    /**
+     * Get banners
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBanners()
+    {
+        return $this->banners;
     }
 }
