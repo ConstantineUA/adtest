@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use AppBundle\Entity\Contentunit;
+use AppBundle\Validator\Constraints as AppBundleAssert;
 
 /**
  * Banner entity class
@@ -90,6 +91,7 @@ class Banner
 
     /**
      * @Vich\UploadableField(mapping="banner_image", fileNameProperty="imageName")
+     * @AppBundleAssert\BannerImage
      * @Assert\Image()
      *
      * @var File
@@ -303,6 +305,18 @@ class Banner
     public function getContentunits()
     {
         return $this->contentunits;
+    }
+
+    /**
+     * Reset contentunits
+     *
+     * @return Banner
+     */
+    public function resetContentunits()
+    {
+        $this->contentunits = new ArrayCollection();
+
+        return $this;
     }
 
     /**

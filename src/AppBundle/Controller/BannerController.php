@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Banner;
+use AppBundle\AppBundle;
 
 /**
  * Controller deals with managing banners
@@ -49,7 +50,9 @@ class BannerController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $banner->setUser($this->getUser());
+            $banner->setUser($this->getUser())
+                ->addContentunit($this->findContentunit($banner));
+
             $em->persist($banner);
             $em->flush();
 
@@ -78,6 +81,11 @@ class BannerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            if (!is_null($banner->getImageFile())) {
+                $banner->resetContentunits()
+                    ->addContentunit($this->findContentunit($banner));
+            }
+
             $em = $this->getDoctrine()->getManager()->flush();
 
             $this->flash('flash_success', 'bannerEditSuccess');
@@ -129,5 +137,18 @@ class BannerController extends Controller
     protected function isAllowedToModify(Banner $banner)
     {
         return $banner->getUser() === $this->getUser();
+    }
+
+    /**
+     * Finds an appropriate contentunit for the given banner
+     *
+     * @param Banner $banner
+     * @return AppBundle\Entity\Contentunit
+     */
+    protected function findContentunit(Banner $banner)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        return $em->getRepository('AppBundle\Entity\Contentunit')->findByImage($banner->getImageFile());
     }
 }
