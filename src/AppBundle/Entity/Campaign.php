@@ -54,6 +54,12 @@ class Campaign
      */
     protected $user;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Launch", mappedBy="campaign")
+     */
+    protected $launches;
+
 
 
     /**
@@ -186,5 +192,39 @@ class Campaign
     public function getBanners()
     {
         return $this->banners;
+    }
+
+    /**
+     * Add launch
+     *
+     * @param \AppBundle\Entity\Launch $launch
+     *
+     * @return Campaign
+     */
+    public function addLaunch(\AppBundle\Entity\Launch $launch)
+    {
+        $this->launches[] = $launch;
+
+        return $this;
+    }
+
+    /**
+     * Remove launch
+     *
+     * @param \AppBundle\Entity\Launch $launch
+     */
+    public function removeLaunch(\AppBundle\Entity\Launch $launch)
+    {
+        $this->launches->removeElement($launch);
+    }
+
+    /**
+     * Get launches
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLaunches()
+    {
+        return $this->launches;
     }
 }
