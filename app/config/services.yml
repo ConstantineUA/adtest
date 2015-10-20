@@ -24,3 +24,11 @@ services:
             - { name: form.type, alias: banner_image }
 
 
+    validator.unique.banner_image:
+        class: AppBundle\Validator\Constraints\BannerImageValidator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: validator.constraint_validator, alias: banner_image_validator }
+
+
