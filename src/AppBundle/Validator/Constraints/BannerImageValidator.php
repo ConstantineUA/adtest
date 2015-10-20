@@ -5,6 +5,7 @@ namespace AppBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\ContentunitRepository;
 
 /**
  * Validator to check that an uploaded banner image has an appropriate dimension
@@ -16,19 +17,20 @@ use Doctrine\ORM\EntityManager;
 class BannerImageValidator extends ConstraintValidator
 {
     /**
-     * Store a reference to the entity manager
+     * Store a reference to the contentunit repository
      *
-     * @var EntityManager
+     * @var ContentunitRepository
      */
-    private $em;
+    private $repository;
 
     /**
      * Inject dependencies
      *
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em) { // i guess it's EntityManager the type
-        $this->em = $em;
+    public function __construct(ContentunitRepository $repository)
+    {
+        $this->repository = $repository;
     }
 
     /**
@@ -38,26 +40,20 @@ class BannerImageValidator extends ConstraintValidator
      */
     public function validate($image, Constraint $constraint)
     {
-        if (!$image) {
+        if (!$image || !getimagesize($image->getPathname())) {
             return;
         }
 
-        $size = getimagesize($image->getPathname());
+        $contentunit = $this->repository->findByImage($image);
 
-        if ($size) {
-            $repository = $this->em->getRepository('AppBundle\Entity\Contentunit');
+        if (!$contentunit) {
+            $allDimensions = array_map(function ($dimension) {
+                return $dimension['width'] . '*' . $dimension['height'];
+            }, $this->repository->findAllAvailableDimensions());
 
-            $contentunit = $repository->findByImage($image);
-
-            if (!$contentunit) {
-                $allDimensions = array_map(function ($dimension) {
-                    return $dimension['width'] . '*' . $dimension['height'];
-                }, $repository->findAllAvailableDimensions());
-
-                $this->context->buildViolation($constraint->message)
-                    ->setParameter('%dimensions%', implode(',', $allDimensions))
-                    ->addViolation();
-            }
+            $this->context->buildViolation($constraint->message)
+                ->setParameter('%dimensions%', implode(',', $allDimensions))
+                ->addViolation();
         }
     }
 }
