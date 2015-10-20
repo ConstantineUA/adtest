@@ -19,6 +19,6 @@ use Symfony\Component\Form\AbstractType;
 
     public function getName()
     {
-        return 'banner_image';
+        return 'app_banner_image';
     }
 }

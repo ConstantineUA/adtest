@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Campaign;
+use AppBundle\Form\CampaignType;
 
 /**
  * Controller to deal with campaigns CRUD actions
@@ -60,10 +61,10 @@ class CampaignController extends Controller
     {
         $campaign = new Campaign();
 
-        $form = $this->createForm('campaign', $campaign);
+        $form = $this->createForm(new CampaignType(), $campaign);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             $campaign->setUser($this->getUser());

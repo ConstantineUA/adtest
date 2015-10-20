@@ -15,20 +15,10 @@ services:
         arguments:
             - AppBundle\Entity\Contentunit
 
-    app.form.type.banner:
-        class: AppBundle\Form\Type\BannerType
-        tags:
-            - { name: form.type, alias: banner }
-
-    app.form.type.campaign:
-        class: AppBundle\Form\Type\CampaignType
-        tags:
-            - { name: form.type, alias: campaign }
-
     app.form.type.banner_image:
         class: AppBundle\Form\Type\BannerImageType
         tags:
-            - { name: form.type, alias: banner_image }
+            - { name: form.type, alias: app_banner_image }
 
 
     validator.unique.banner_image:

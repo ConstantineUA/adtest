@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form\Type;
+namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +19,7 @@ class BannerType extends AbstractType
             ->add('name')
             ->add('caption')
             ->add('clickurl')
-            ->add('imageFile', 'banner_image', array('required' => false))
+            ->add('imageFile', 'app_banner_image', array('required' => false))
 
             ->add('save', 'submit')
         ;

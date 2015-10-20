@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Banner;
+use AppBundle\Form\BannerType;
 use AppBundle\AppBundle;
 
 /**
@@ -44,14 +45,17 @@ class BannerController extends Controller
     {
         $banner = new Banner();
 
-        $form = $this->createForm('banner', $banner);
+        $form = $this->createForm(new BannerType(), $banner);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $banner->setUser($this->getUser())
-                ->addContentunit($this->findContentunit($banner));
+            $banner->setUser($this->getUser());
+
+            if (!is_null($banner->getImageFile())) {
+                $banner->addContentunit($this->findContentunit($banner));
+            }
 
             $em->persist($banner);
             $em->flush();
@@ -77,10 +81,11 @@ class BannerController extends Controller
             return $this->redirectToRoute('bannerIndex');
         }
 
-        $form = $this->createForm('banner', $banner);
+        $form = $this->createForm(new BannerType(), $banner);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+
             if (!is_null($banner->getImageFile())) {
                 $banner->resetContentunits()
                     ->addContentunit($this->findContentunit($banner));
