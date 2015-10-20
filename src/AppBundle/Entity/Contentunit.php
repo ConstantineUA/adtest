@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="ads_contentunits")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ContentunitRepository")
  */
 class Contentunit
 {
@@ -37,7 +38,7 @@ class Contentunit
     /**
      * @ORM\Column(type="smallint")
      */
-    protected $heigh;
+    protected $height;
 
     /**
      * @ORM\Column(type="text")
