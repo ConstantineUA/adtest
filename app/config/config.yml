@@ -41,6 +41,7 @@ twig:
         flash_error: danger
         flash_info: info
         flash_success: success
+        date_format: 'Y-m-d H:i:s'
 
     form:
         resources:
