@@ -4,7 +4,6 @@ namespace AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\ContentunitRepository;
 
 /**
@@ -26,7 +25,7 @@ class BannerImageValidator extends ConstraintValidator
     /**
      * Inject dependencies
      *
-     * @param EntityManager $em
+     * @param ContentunitRepository $em
      */
     public function __construct(ContentunitRepository $repository)
     {
