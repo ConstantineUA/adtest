@@ -26,8 +26,8 @@ class BannerController extends Controller
      */
     public function indexAction()
     {
-        $banners = $this->getDoctrine()->getRepository('AppBundle\Entity\Banner')
-            ->findByUserForRender($this->getUser());
+        $banners = $this->getDoctrine()->getRepository('AppBundle:Banner')
+            ->findAllByUserForRender($this->getUser());
 
         $pageData = array(
             'banners' => $banners,
@@ -75,7 +75,10 @@ class BannerController extends Controller
      */
     public function editAction(Banner $banner, Request $request)
     {
-        if (!$this->isAllowedToModify($banner)) {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Banner');
+
+        if (!$repository->isAllowedToModify($this->getUser(), $banner)) {
             $this->flash('flash_error', 'bannerEditError');
 
             return $this->redirectToRoute('bannerIndex');
@@ -91,7 +94,7 @@ class BannerController extends Controller
                     ->addContentunit($this->findContentunit($banner));
             }
 
-            $em = $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             $this->flash('flash_success', 'bannerEditSuccess');
 
@@ -108,8 +111,10 @@ class BannerController extends Controller
      */
     public function deleteAction(Banner $banner)
     {
-        if ($this->isAllowedToModify($banner)) {
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Banner');
+
+        if ($repository->isAllowedToModify($this->getUSer(), $banner)) {
             $em->remove($banner);
             $em->flush();
 
@@ -134,17 +139,6 @@ class BannerController extends Controller
     }
 
     /**
-     * Checks is given banner is allowed to modify for the current user
-     *
-     * @param Banner $banner
-     * @return boolean
-     */
-    protected function isAllowedToModify(Banner $banner)
-    {
-        return $banner->getUser() === $this->getUser();
-    }
-
-    /**
      * Finds an appropriate contentunit for the given banner
      *
      * @param Banner $banner
@@ -154,6 +148,6 @@ class BannerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        return $em->getRepository('AppBundle\Entity\Contentunit')->findByImage($banner->getImageFile());
+        return $em->getRepository('AppBundle:Contentunit')->findByImage($banner->getImageFile());
     }
 }

@@ -25,6 +25,6 @@ class CampaignType extends AbstractType
 
     public function getName()
     {
-        return 'campaign';
+        return 'appbundle_campaign';
     }
 }

@@ -13,7 +13,7 @@ use AppBundle\Entity\Banner;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="ads_campaigns")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\CampaignRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\CampaignRepository", readOnly=true)
  */
 class Campaign
 {
@@ -29,12 +29,6 @@ class Campaign
      * @Assert\Length(max=128)
      */
     protected $name;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Banner", inversedBy="campaigns")
-     * @ORM\JoinTable(name="ads_campaigns_banners")
-     **/
-    protected $banners;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -55,6 +49,12 @@ class Campaign
     protected $user;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Banner", inversedBy="campaigns")
+     * @ORM\JoinTable(name="ads_campaigns_banners")
+     **/
+    protected $banners;
+
+    /**
      *
      * @ORM\OneToMany(targetEntity="Launch", mappedBy="campaign")
      */
@@ -68,6 +68,7 @@ class Campaign
     public function __construct()
     {
         $this->banners = new ArrayCollection();
+        $this->launches = new ArrayCollection();
     }
 
     /**

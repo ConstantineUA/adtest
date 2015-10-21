@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="ads_contentunits")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\ContentunitRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ContentunitRepository", readOnly=true)
  */
 class Contentunit
 {

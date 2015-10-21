@@ -27,7 +27,7 @@ class BannerType extends AbstractType
 
     public function getName()
     {
-        return 'banner';
+        return 'appbundle_banner';
     }
 
 }

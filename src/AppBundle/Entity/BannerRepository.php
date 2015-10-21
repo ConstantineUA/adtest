@@ -14,12 +14,24 @@ use UserBundle\Entity\User;
 class BannerRepository extends EntityRepository
 {
     /**
+     * Checks if given banner is allowed to modify for the current user
+     *
+     * @param User $user
+     * @param Banner $banner
+     * @return boolean
+     */
+    public function isAllowedToModify(User $user, Banner $banner)
+    {
+        return $user === $banner->getUser();
+    }
+
+    /**
      * Returns the array of banners to render for the given user
      *
      * @param UserBundle\Entity\User $user
      * @return array
      */
-    public function findByUserForRender(User $user)
+    public function findAllByUserForRender(User $user)
     {
         $query = $this->getBasicQueryBuilderForRender()
             ->setParameter('user', $user)
@@ -35,7 +47,7 @@ class BannerRepository extends EntityRepository
      * @param int $categoryId
      * @return array
      */
-    public function findByUserAndCategoryForRender(User $user, $categoryId)
+    public function findAllByUserAndCategoryForRender(User $user, $categoryId)
     {
         $query = $this->getBasicQueryBuilderForRender()
             ->join('b.campaigns', 'c')

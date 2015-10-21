@@ -25,8 +25,8 @@ class CampaignController extends Controller
      */
     public function indexAction()
     {
-        $campaigns = $this->getDoctrine()->getRepository('AppBundle\Entity\Campaign')
-            ->findByUserForRender($this->getUser());
+        $campaigns = $this->getDoctrine()->getRepository('AppBundle:Campaign')
+            ->findAllByUserForRender($this->getUser());
 
         $pageData = array(
             'campaigns' => $campaigns,
@@ -42,8 +42,8 @@ class CampaignController extends Controller
      */
     public function singleViewAction($id)
     {
-        $campaign = $this->getDoctrine()->getRepository('AppBundle\Entity\Campaign')
-            ->findByIdForRender($this->getUser(), $id);
+        $campaign = $this->getDoctrine()->getRepository('AppBundle:Campaign')
+            ->findOneByIdForRender($this->getUser(), $id);
 
         $pageData = array(
             'campaign' => $campaign,
