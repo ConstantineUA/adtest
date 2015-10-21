@@ -19,7 +19,7 @@ class BannerType extends AbstractType
             ->add('name')
             ->add('caption')
             ->add('clickurl')
-            ->add('imageFile', 'app_banner_image', array('required' => false))
+            ->add('imageFile', 'app_banner_image', array('required' => false,))
 
             ->add('save', 'submit')
         ;

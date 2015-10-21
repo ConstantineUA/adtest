@@ -11,7 +11,7 @@ class CampaignType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description', 'textarea', array('required' => false))
+            ->add('description', 'textarea', array('required' => false,))
             ->add('banners', 'entity', array(
                 'class' => 'AppBundle:Banner',
                 'choice_label' => 'name',
