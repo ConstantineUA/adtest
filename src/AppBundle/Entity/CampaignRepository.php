@@ -12,12 +12,17 @@ use UserBundle\Entity\User;
  */
 class CampaignRepository extends EntityRepository
 {
+    public function isAllowedToAddLaunch(User $user, Campaign $campaign)
+    {
+        return $campaign->getUser() === $user && $campaign->getLaunches()->isEmpty();
+    }
+
     /**
      * Fetches the necessary fields to render campaigns list
      *
      * @param User $user
      */
-    public function findByUserForRender(User $user)
+    public function findAllByUserForRender(User $user)
     {
         $em = $this->getEntityManager();
 
@@ -26,7 +31,7 @@ class CampaignRepository extends EntityRepository
                 c.id,
                 c.name,
                 c.description
-            FROM AppBundle\Entity\Campaign c
+            FROM AppBundle:Campaign c
             WHERE c.user = :user
             ORDER BY c.id DESC'
         )->setParameter('user', $user);
@@ -41,7 +46,7 @@ class CampaignRepository extends EntityRepository
      * @param int $id
      * @return array
      */
-    public function findByIdForRender(User $user, $id)
+    public function findOneByIdForRender(User $user, $id)
     {
         $em = $this->getEntityManager();
 
@@ -50,7 +55,7 @@ class CampaignRepository extends EntityRepository
                 c.id,
                 c.name,
                 c.description
-            FROM AppBundle\Entity\Campaign c
+            FROM AppBundle:Campaign c
             WHERE c.id = :id AND c.user = :user'
         )->setParameters(array(
             'id' =>  $id,
@@ -58,8 +63,12 @@ class CampaignRepository extends EntityRepository
         ));
 
         $campaign = $query->getOneOrNullResult($query::HYDRATE_ARRAY);
+
         if ($campaign) {
-            $campaign['banners'] = $this->getEntityManager()->getRepository('AppBundle\Entity\Banner')->findByUserAndCategoryForRender($user, $id);
+            $em = $this->getEntityManager();
+
+            $campaign['banners'] = $em->getRepository('AppBundle:Banner')->findAllByUserAndCategoryForRender($user, $id);
+            $campaign['launch'] = $em->getRepository('AppBundle:Launch')->findOneByCategoryForRender($id);
         }
 
         return $campaign;

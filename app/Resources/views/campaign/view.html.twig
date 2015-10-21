@@ -8,6 +8,35 @@
 <div class="panel panel-default">
     <div class="panel-body">{{ campaign.description }}</div>
 </div>
+
+{% if campaign.launch %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'launchDetails'|trans }}</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+            <li>{{ 'launchStart'|trans }} - {{ campaign.launch.start|date(date_format) }}</li>
+            <li>{{ 'launchEnd'|trans }} - {{ campaign.launch.end|date(date_format) }}</li>
+        </ul>
+
+        {% set progress = campaign.launch.hits / campaign.launch.limit * 100 %}
+        {% set progress = progress|round(2, 'floor') %}
+        <div class="progress">
+            <div class="progress-bar"
+                role="progressbar"
+                aria-valuenow="{{ progress }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: {{ progress }}%;"
+            >{{ progress }}%</div>
+        </div>
+    </div>
+</div>
+{% else %}
+<a class="btn btn-primary" href="{{ path('launchAdd', { 'id': campaign.id } ) }}">{{ 'launchAdd'|trans }}</a>
+{% endif %}
+
 {% if campaign.banners %}
 {% include 'banner/list.html.twig' with { banners: campaign.banners, showButtons: false } %}
 {% endif %}

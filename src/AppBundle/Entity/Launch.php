@@ -4,12 +4,16 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Campaign;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as FormAssert;
 
 /**
  * Campaign entity class
  *
  * @ORM\Entity
  * @ORM\Table(name="ads_campaigns_launches")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\LaunchRepository", readOnly=true)
+ * @FormAssert\CampaignLaunchTime()
  */
 class Launch
 {
@@ -22,6 +26,8 @@ class Launch
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Range(min = "now")
+     * @Assert\DateTime()
      *
      * @var \DateTime
      */
@@ -29,6 +35,7 @@ class Launch
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      *
      * @var \DateTime
      */
@@ -37,10 +44,11 @@ class Launch
     /**
      * @ORM\Column(type="integer")
      */
-    protected $hits;
+    protected $hits = 0;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="_limit")
+     * @Assert\Range(min = 1)
      */
     protected $limit;
 

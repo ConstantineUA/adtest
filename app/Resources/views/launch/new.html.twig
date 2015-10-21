@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Launch Campaign{% endblock %}
+
+{% block pageHeader %}{{ 'launchAdd'|trans ~ '  ' ~ campaign.name}}{% endblock %}
+
+{% block content %}
+{{ form(form) }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'campaign/sidebar.html.twig' %}
+{% endblock %}

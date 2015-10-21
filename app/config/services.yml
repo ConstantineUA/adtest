@@ -21,11 +21,16 @@ services:
             - { name: form.type, alias: app_banner_image }
 
 
-    validator.unique.banner_image:
+    validator.banner_image:
         class: AppBundle\Validator\Constraints\BannerImageValidator
         arguments:
             - "@contentunit_repository"
         tags:
             - { name: validator.constraint_validator, alias: banner_image_validator }
+
+    validator.campaign_launch_time:
+        class: AppBundle\Validator\Constraints\CampaignLaunchTimeValidator
+        tags:
+            - { name: validator.constraint_validator, alias: campaign_launch_date_validator }
 
 

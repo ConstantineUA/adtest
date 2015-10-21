@@ -21,3 +21,10 @@ noCampaigns: No campaigns yet!
 addCampaign: Add a Campaign
 campaignAdded: The campaign has been added!
 
+launchDetails: Launch Details
+launchStart: Start Date
+launchEnd: End Date
+launchAdd: Launch
+launchSaved: The campaign has been launched!
+launchError: An error occured while launching a campaign
+
