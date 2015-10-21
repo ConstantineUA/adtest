@@ -54,6 +54,7 @@ class Launch
 
     /**
      * @ORM\ManyToOne(targetEntity="Campaign", inversedBy="launches")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      **/
     protected $campaign;
 
