@@ -118,3 +118,17 @@ vich_uploader:
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            uploadable: false
+            sluggable: true
+            timestampable: false
+            translatable: false
+            tree: false
+            blameable: false
+            loggable: false
+            sortable: false
+            softdeleteable: false
+
