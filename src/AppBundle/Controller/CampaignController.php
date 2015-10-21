@@ -45,6 +45,10 @@ class CampaignController extends Controller
         $campaign = $this->getDoctrine()->getRepository('AppBundle:Campaign')
             ->findOneByIdForRender($this->getUser(), $id);
 
+        if (!$campaign) {
+            throw $this->createNotFoundException( $this->get('translator')->trans('campaignNotFound'));
+        }
+
         $pageData = array(
             'campaign' => $campaign,
         );
