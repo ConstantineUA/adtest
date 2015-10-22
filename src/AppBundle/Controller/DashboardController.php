@@ -20,6 +20,16 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('dashboard.html.twig', array());
+        $twig = $this->get('twig');
+
+        $adJs = $twig->render('/advertisement/inject.js.html.twig', array());
+        $adContainer = $twig->render('/advertisement/inject.container.html.twig', array());
+
+        $pageData = array(
+            'adJs' => $adJs,
+            'adContainer' => $adContainer,
+        );
+
+        return $this->render('dashboard.html.twig', $pageData);
     }
 }

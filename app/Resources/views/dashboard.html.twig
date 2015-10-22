@@ -5,4 +5,43 @@
 {% block pageHeader %}Welcome!{% endblock %}
 
 
-{% block content %}Hello, world!{% endblock %}
+{% block content %}
+<h2>Please have a look at the working example</h2>
+{% include 'advertisement/inject.container.html.twig' %}
+
+<h2>How to embed an advertisement</h2>
+To include an advertisement into you website, please follow these 2 steps:
+<ul>
+    <li>
+        Include a JS-script located at <a href="http://adserver.test/js/adserver-loader.js">http://adserver.test/js/adserver-loader.js</a> somewhere in your scripts area (before closing body tag)
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{ adJs|e }}
+            </div>
+        </div>
+    </li>
+
+    <li>
+        Place a special container somewhere on your website where you'd like to see our advertisement
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{ adContainer|e }}
+            </div>
+        </div>
+        You could specify the desired contentunit and campaign code in data attributes
+        <div class="panel panel-default">
+            <div class="panel-body">
+                data-contentunit="contentunit-code", data-campaign="campaign-code"
+            </div>
+        </div>
+    </li>
+
+    <li>
+        That's all! Enjoy quality advertisements at your website
+    </li>
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+{% include 'advertisement/inject.js.html.twig' %}
+{% endblock %}
