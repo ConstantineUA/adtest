@@ -16,7 +16,9 @@ To include an advertisement into you website, please follow these 2 steps:
         Include a JS-script located at <a href="http://adserver.test/js/adserver-loader.js">http://adserver.test/js/adserver-loader.js</a> somewhere in your scripts area (before closing body tag)
         <div class="panel panel-default">
             <div class="panel-body">
-                {{ adJs|e }}
+                {% filter escape %}
+                {% include 'advertisement/inject.js.html.twig' %}
+                {% endfilter %}
             </div>
         </div>
     </li>
@@ -25,7 +27,9 @@ To include an advertisement into you website, please follow these 2 steps:
         Place a special container somewhere on your website where you'd like to see our advertisement
         <div class="panel panel-default">
             <div class="panel-body">
-                {{ adContainer|e }}
+                {% filter escape %}
+                {% include 'advertisement/inject.container.html.twig' %}
+                {% endfilter %}
             </div>
         </div>
         You could specify the desired contentunit and campaign code in data attributes
