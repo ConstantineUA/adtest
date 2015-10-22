@@ -7,6 +7,11 @@ use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
+/**
+ * A custom class to add support of MySQL RAND() function in a DQL-query
+ *
+ * @link http://www.issart.com/blog/symfony-2-doctrine-2-get-random-entites-mysql/
+ */
 class RandFunction extends FunctionNode
 {
     public function parse(Parser $parser)
