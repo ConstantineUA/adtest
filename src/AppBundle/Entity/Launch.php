@@ -12,7 +12,7 @@ use AppBundle\Validator\Constraints as FormAssert;
  *
  * @ORM\Entity
  * @ORM\Table(name="ads_campaigns_launches")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\LaunchRepository", readOnly=true)
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\LaunchRepository")
  * @FormAssert\CampaignLaunchTime()
  */
 class Launch
