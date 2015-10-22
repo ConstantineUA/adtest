@@ -54,7 +54,8 @@ class CampaignRepository extends EntityRepository
             'SELECT
                 c.id,
                 c.name,
-                c.description
+                c.description,
+                c.slug
             FROM AppBundle:Campaign c
             WHERE c.id = :id AND c.user = :user'
         )->setParameters(array(

@@ -12,6 +12,26 @@
 {% if campaign.launch %}
 <div class="panel panel-default">
     <div class="panel-heading">
+        <h3 class="panel-title">{{ 'campaignEmbed'|trans }}</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">
+                {% filter escape %}
+                {% include 'advertisement/inject.js.html.twig' with { campaign: campaign.slug } %}
+                {% endfilter %}
+            </li>
+            <li class="list-group-item">
+                {% filter escape %}
+                {% include 'advertisement/inject.container.html.twig' with { campaign: campaign.slug } %}
+                {% endfilter %}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
         <h3 class="panel-title">{{ 'launchDetails'|trans }}</h3>
     </div>
     <div class="panel-body">

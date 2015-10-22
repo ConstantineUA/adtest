@@ -21,6 +21,7 @@ noCampaigns: No campaigns yet!
 addCampaign: Add a Campaign
 campaignAdded: The campaign has been added!
 campaignNotFound: Can't find the given campaign
+campaignEmbed: Embed Code
 
 launchDetails: Launch Details
 launchStart: Start Date
