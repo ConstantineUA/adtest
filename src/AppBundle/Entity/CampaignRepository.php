@@ -68,6 +68,7 @@ class CampaignRepository extends EntityRepository
             $em = $this->getEntityManager();
 
             $campaign['banners'] = $em->getRepository('AppBundle:Banner')->findAllByUserAndCategoryForRender($user, $id);
+            $campaign['contentunits'] = array_column($campaign['banners'], 'contentunit_code');
             $campaign['launch'] = $em->getRepository('AppBundle:Launch')->findOneByCategoryForRender($id);
         }
 
