@@ -128,15 +128,15 @@ class Contentunit
     }
 
     /**
-     * Set heigh
+     * Set height
      *
-     * @param integer $heigh
+     * @param integer $height
      *
      * @return Contentunit
      */
-    public function setHeigh($heigh)
+    public function setHeight($height)
     {
-        $this->heigh = $heigh;
+        $this->height = $height;
 
         return $this;
     }
@@ -146,9 +146,9 @@ class Contentunit
      *
      * @return integer
      */
-    public function getHeigh()
+    public function getHeight()
     {
-        return $this->heigh;
+        return $this->height;
     }
 
     /**
