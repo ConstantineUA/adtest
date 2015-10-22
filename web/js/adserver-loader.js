@@ -25,17 +25,19 @@
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
                     var banner = JSON.parse(xhttp.responseText);
 
-                    element.innerHTML =
-                        '<a target="_blank" href="' + banner.clickurl + '" alt="' + banner.name + '">' +
-                            '<img src="' + banner.imageUrl + '">' +
-                            '<span style="display: inline-block; width: 100%;">' + banner.caption + '</span>'
-                        '</a>';
+                    if (banner.clickurl && banner.caption && banner.name) {
+                        element.innerHTML =
+                            '<a target="_blank" href="' + banner.clickurl + '" alt="' + banner.name + '" style="width: 100%; height: 100%; display: inline-block">' +
+                                ((banner.imageUrl) ? '<img src="' + banner.imageUrl + '">' : '') +
+                                '<span style="display: inline-block; width: 100%;">' + banner.caption + '</span>'
+                            '</a>';
 
-                    element.style.width = banner.width + 10 + 'px';
-                    element.style.border = '1px solid black';
-                    element.style.borderRadius = '5px';
-                    element.style.padding = '5px';
-                    element.style.textAlign = 'center';
+
+                        element.style.width = banner.width + 'px';
+                        element.style.height = banner.height + 'px';
+                        element.style.border = '1px solid black';
+                        element.style.textAlign = 'center';
+                    }
                 }
             }
         })(containers[i], xhttp);

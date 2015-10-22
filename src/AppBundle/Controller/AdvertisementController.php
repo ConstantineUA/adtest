@@ -56,6 +56,10 @@ class AdvertisementController extends Controller
      */
     protected function generateImageUrl($banner)
     {
+        if (!$banner['imageName']) {
+            return '';
+        }
+
         $request = $this->container->get('request');
 
         $urlHelper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
