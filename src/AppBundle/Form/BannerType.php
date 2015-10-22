@@ -19,6 +19,10 @@ class BannerType extends AbstractType
             ->add('name')
             ->add('caption')
             ->add('clickurl')
+            ->add('contentunits', 'entity', array(
+                'class' => 'AppBundle\Entity\Contentunit',
+                'choice_label' => 'name',
+            ))
             ->add('imageFile', 'app_banner_image', array('required' => false,))
 
             ->add('save', 'submit')

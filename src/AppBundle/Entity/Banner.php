@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as FormAssert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use AppBundle\Entity\Contentunit;
-use AppBundle\Validator\Constraints as AppBundleAssert;
 
 /**
  * Banner entity class
@@ -18,6 +18,7 @@ use AppBundle\Validator\Constraints as AppBundleAssert;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\BannerRepository")
  * @Vich\Uploadable
+ * @FormAssert\BannerImage()
  */
 class Banner
 {
@@ -91,7 +92,6 @@ class Banner
 
     /**
      * @Vich\UploadableField(mapping="banner_image", fileNameProperty="imageName")
-     * @AppBundleAssert\BannerImage
      * @Assert\Image()
      *
      * @var File
@@ -315,6 +315,18 @@ class Banner
     public function resetContentunits()
     {
         $this->contentunits = new ArrayCollection();
+
+        return $this;
+    }
+
+    public function setContentunits($contentunits)
+    {
+        if (!$contentunits instanceof ArrayCollection) {
+            $this->resetContentunits();
+            $this->addContentunit($contentunits);
+        } else {
+            $this->contentunits = $contentunits;
+        }
 
         return $this;
     }

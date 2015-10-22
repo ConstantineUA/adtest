@@ -53,10 +53,6 @@ class BannerController extends Controller
 
             $banner->setUser($this->getUser());
 
-            if (!is_null($banner->getImageFile())) {
-                $banner->addContentunit($this->findContentunit($banner));
-            }
-
             $em->persist($banner);
             $em->flush();
 
@@ -88,12 +84,6 @@ class BannerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            if (!is_null($banner->getImageFile())) {
-                $banner->resetContentunits()
-                    ->addContentunit($this->findContentunit($banner));
-            }
-
             $em->flush();
 
             $this->flash('flash_success', 'bannerEditSuccess');

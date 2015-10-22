@@ -116,7 +116,7 @@ vich_uploader:
     mappings:
         banner_image:
             uri_prefix:         /images/banners
-            upload_destination: %kernel.root_dir%/../web/images/banners
+            upload_destination: %bannersUploadDestination%
             namer:              vich_uploader.namer_uniqid
 
             inject_on_load:     false

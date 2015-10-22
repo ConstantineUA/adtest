@@ -13,7 +13,12 @@ use Symfony\Component\Validator\Constraint;
  */
 class BannerImage extends Constraint
 {
-    public $message = "Wrong image dimensions (accepted dimensions are: %dimensions%)";
+    public $message = "Wrong image dimension (accepted dimensions for the contentunit are less then %dimension%)";
+
+    public function getTargets()
+    {
+        return self::CLASS_CONSTRAINT;
+    }
 
     public function validatedBy()
     {
