@@ -57,7 +57,7 @@ class BannerImageValidator extends ConstraintValidator
         // has to be at least 20 pixels less than a contentunit
         $minAllowedPadding = 20;
 
-        $contentunit = $entity->getContentunits()[0];
+        $contentunit = $entity->getContentunits()->first();
         $size = getimagesize($pathname);
 
         if ($size[0] - $contentunit->getWidth() > $minAllowedPadding
