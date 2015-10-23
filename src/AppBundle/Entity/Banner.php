@@ -378,38 +378,4 @@ class Banner
     {
         return $this->createdAt;
     }
-
-    /**
-     * Add banner
-     *
-     * @param \AppBundle\Entity\Campaign $banner
-     *
-     * @return Banner
-     */
-    public function addBanner(Campaign $banner)
-    {
-        $this->banners[] = $banner;
-
-        return $this;
-    }
-
-    /**
-     * Remove banner
-     *
-     * @param \AppBundle\Entity\Campaign $banner
-     */
-    public function removeBanner(Campaign $banner)
-    {
-        $this->banners->removeElement($banner);
-    }
-
-    /**
-     * Get banners
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getBanners()
-    {
-        return $this->banners;
-    }
 }
