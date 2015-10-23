@@ -13,6 +13,11 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class CampaignLaunchTimeValidator extends ConstraintValidator
 {
+    /**
+     * Check that start date of the launch is lower than the end date of the launch
+     *
+     * @see \Symfony\Component\Validator\ConstraintValidatorInterface::validate()
+     */
     public function validate($entity, Constraint $constraint)
     {
         if (!is_null($entity->getStart()) && !is_null($entity->getEnd())) {

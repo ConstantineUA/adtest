@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use UserBundle\Entity\User;
 
 /**
- * Custom repository to deals with banners
+ * Custom repository to deal with banners
  *
  * @author constantine
  *

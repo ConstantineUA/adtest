@@ -12,6 +12,13 @@ use UserBundle\Entity\User;
  */
 class CampaignRepository extends EntityRepository
 {
+    /**
+     * Check if allowed to launch a given campaign
+     *
+     * @param User $user
+     * @param Campaign $campaign
+     * @return boolean
+     */
     public function isAllowedToAddLaunch(User $user, Campaign $campaign)
     {
         return $campaign->getUser() === $user && $campaign->getLaunches()->isEmpty();

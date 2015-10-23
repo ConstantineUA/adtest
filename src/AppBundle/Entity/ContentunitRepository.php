@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Bridge\Twig\AppVariable;
 use AppBundle\AppBundle;
 
 /**

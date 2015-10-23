@@ -5,8 +5,19 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use AppBundle\AppBundle;
 
+/**
+ * Repository to work with launch objects
+ *
+ * @author constantine
+ *
+ */
 class LaunchRepository extends EntityRepository
 {
+    /**
+     * Find a launch object linked to the given campaign
+     *
+     * @param int $categoryId
+     */
     public function findOneByCategoryForRender($categoryId)
     {
         $em = $this->getEntityManager();

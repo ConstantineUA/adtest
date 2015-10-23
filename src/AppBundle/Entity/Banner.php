@@ -319,6 +319,12 @@ class Banner
         return $this;
     }
 
+    /**
+     * Overwrite a contentunits array with the incoming value
+     *
+     * @param mixed $contentunits
+     * @return \AppBundle\Entity\Banner
+     */
     public function setContentunits($contentunits)
     {
         if (!$contentunits instanceof ArrayCollection) {
