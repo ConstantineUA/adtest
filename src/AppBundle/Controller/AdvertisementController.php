@@ -68,10 +68,6 @@ class AdvertisementController extends Controller
             $urlHelper->asset($banner, 'imageFile', 'AppBundle\Entity\Banner')
         );
 
-        if ('dev' == $this->container->get('kernel')->getEnvironment()) {
-            $url = str_replace('/app_dev.php', '', $url);
-        }
-
         return $url;
     }
 }
